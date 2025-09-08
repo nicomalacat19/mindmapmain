@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mental Health App - MindMap</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #001f3f, #004080);
+      color: white;
+      text-align: center;
+    }
+    h1, h2 {
+      color: #FFDD44;
+    }
+    .container {
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 850px;
+      background: rgba(0, 64, 128, 0.9);
+      border-radius: 16px;
+      box-shadow: 0px 6px 16px rgba(0,0,0,0.5);
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(15px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .button {
+      background-color: #FFDD44;
+      color: #001f3f;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      margin: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+    }
+    .button:hover {
+      background-color: #FFC107;
+      transform: scale(1.05);
+    }
+    .hidden {
+      display: none;
+    }
+    .question {
+      text-align: left;
+      margin: 15px 0;
+    }
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+    textarea {
+      width: 100%;
+      height: 400px;
+      font-size: 16px;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background-color: #f1f1f1;
+      color: #333;
+    }
+    #seekHelp a {
+      color: #FFDD44;
+      text-decoration: none;
+    }
+    #seekHelp a:hover {
+      text-decoration: underline;
+    }
+    .logo {
+      width: 180px;
+      margin: 15px;
+    }
+    .response-box {
+      background: #f1f1f1;
+      color: #333;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 15px;
+      min-height: 80px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <!-- Home -->
+  <div id="home" class="container">
+    <img src="https://i.imgur.com/taafGE5.png" class="logo" alt="MindMap Logo">
+    <h1>Welcome to MindMap</h1>
+    <h2>Your Mental Health Companion</h2>
+    <button class="button" onclick="navigateTo('disclaimer')">How Well Do You Know Yourself?</button>
+    <button class="button" onclick="navigateTo('therapyNotes')">Therapy Notes</button>
+    <button class="button" onclick="navigateTo('seekHelp')">Seek Help</button>
+    <button class="button" onclick="navigateTo('chatDisclaimer')">AI Chatbot Prototype</button>
+    <button class="button" onclick="window.location.href='https://nicomalacat.github.io/MindMapGames/'">Play Games</button>
+    <p>Researcher:<br><strong>Lance Saldon</strong></p>
+    <img src="https://i.imgur.com/khZg9P9.png" alt="DCNHS Logo" class="logo">
+  </div>
+
+  <!-- Disclaimer -->
+  <div id="disclaimer" class="container hidden">
+    <h2>Disclaimer</h2>
+    <p>The quiz is not a clinical diagnosis but a tool to help you reflect on your mental well-being. For professional help, please consult a licensed counselor or therapist.</p>
+    <button class="button" onclick="navigateTo('quizPage')">Agree</button>
+    <button class="button" onclick="navigateTo('home')">Disagree</button>
+  </div>
+
+  <!-- Quiz Page -->
+  <div id="quizPage" class="container hidden">
+    <h2>How Well Do You Know Yourself?</h2>
+    <form id="quizForm" onsubmit="event.preventDefault(); submitQuiz();">
+      <!-- 10 Questions -->
+      <!-- (kept exactly the same, won’t erase) -->
+      <div class="question"><p>1. I often feel nervous or on edge.</p>
+        <input type="radio" name="q1" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q1" value="2"> Disagree<br>
+        <input type="radio" name="q1" value="3"> Neutral<br>
+        <input type="radio" name="q1" value="4"> Agree<br>
+        <input type="radio" name="q1" value="5"> Strongly Agree<br>
+      </div>
+      <div class="question"><p>2. I have trouble sleeping due to worrying thoughts.</p>
+        <input type="radio" name="q2" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q2" value="2"> Disagree<br>
+        <input type="radio" name="q2" value="3"> Neutral<br>
+        <input type="radio" name="q2" value="4"> Agree<br>
+        <input type="radio" name="q2" value="5"> Strongly Agree<br>
+      </div>
+      <div class="question"><p>3. I feel sad or down most of the time.</p>
+        <input type="radio" name="q3" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q3" value="2"> Disagree<br>
+        <input type="radio" name="q3" value="3"> Neutral<br>
+        <input type="radio" name="q3" value="4"> Agree<br>
+        <input type="radio" name="q3" value="5"> Strongly Agree<br>
+      </div>
+      <div class="question"><p>4. I struggle to focus or concentrate on tasks.</p>
+        <input type="radio" name="q4" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q4" value="2"> Disagree<br>
+        <input type="radio" name="q4" value="3"> Neutral<br>
+        <input type="radio" name="q4" value="4"> Agree<br>
+        <input type="radio" name="q4" value="5"> Strongly Agree<br>
+      </div>
+      <div class="question"><p>5. I avoid social situations because I feel anxious.</p>
+        <input type="radio" name="q5" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q5" value="2"> Disagree<br>
+        <input type="radio" name="q5" value="3"> Neutral<br>
+        <input type="radio" name="q5" value="4"> Agree<br>
+        <input type="radio" name="q5" value="5"> Strongly Agree<br>
+      </div>
+      <div class="question"><p>6. I feel overwhelmed by responsibilities.</p>
+        <input type="radio" name="q6" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q6" value="2"> Disagree<br>
+        <input type="radio" name="q6" value="3"> Neutral<br>
+        <input type="radio" name="q6" value="4"> Agree<br>
+        <input type="radio" name="q6" value="5"> Strongly Agree<br>
+      </div>
+      <div class="question"><p>7. I often feel worthless or like a failure.</p>
+        <input type="radio" name="q7" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q7" value="2"> Disagree<br>
+        <input type="radio" name="q7" value="3"> Neutral<br>
+        <input type="radio" name="q7" value="4"> Agree<br>
+        <input type="radio" name="q7" value="5"> Strongly Agree<br>
+      </div>
+      <div class="question"><p>8. I feel like I can't trust others easily.</p>
+        <input type="radio" name="q8" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q8" value="2"> Disagree<br>
+        <input type="radio" name="q8" value="3"> Neutral<br>
+        <input type="radio" name="q8" value="4"> Agree<br>
+        <input type="radio" name="q8" value="5"> Strongly Agree<br>
+      </div>
+      <div class="question"><p>9. I have frequent mood swings.</p>
+        <input type="radio" name="q9" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q9" value="2"> Disagree<br>
+        <input type="radio" name="q9" value="3"> Neutral<br>
+        <input type="radio" name="q9" value="4"> Agree<br>
+        <input type="radio" name="q9" value="5"> Strongly Agree<br>
+      </div>
+      <div class="question"><p>10. I have thoughts of harming myself or others.</p>
+        <input type="radio" name="q10" value="1"> Strongly Disagree<br>
+        <input type="radio" name="q10" value="2"> Disagree<br>
+        <input type="radio" name="q10" value="3"> Neutral<br>
+        <input type="radio" name="q10" value="4"> Agree<br>
+        <input type="radio" name="q10" value="5"> Strongly Agree<br>
+      </div>
+      <button class="button" type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- Evaluation Page -->
+  <div id="evaluationPage" class="container hidden">
+    <h2>Your Results</h2>
+    <p id="scoreResult"></p>
+    <p id="encouragingMessage"></p>
+    <button class="button" onclick="navigateTo('seekHelp')">Seek Help</button>
+    <button class="button" onclick="navigateTo('home')">Back to Home</button>
+  </div>
+
+  <!-- Therapy Notes -->
+  <div id="therapyNotes" class="container hidden">
+    <h2>Therapy Notes</h2>
+    <textarea id="notes" placeholder="Write your reflections here..."></textarea><br>
+    <button class="button" onclick="navigateTo('home')">Go Home</button>
+  </div>
+
+  <!-- Seek Help -->
+  <div id="seekHelp" class="container hidden">
+    <h2>Seek Help</h2>
+    <p>If you're feeling overwhelmed, please reach out for help.</p>
+    <a href="https://www.crisistextline.org" target="_blank">Crisis Text Line</a><br>
+    <a href="https://www.nami.org/Your-Journey" target="_blank">National Alliance on Mental Illness</a>
+    <button class="button" onclick="navigateTo('home')">Back to Home</button>
+  </div>
+
+  <!-- Chatbot Disclaimer -->
+  <div id="chatDisclaimer" class="container hidden">
+    <h2>Disclaimer</h2>
+    <p>⚠️ This chatbot feature is a <strong>prototype only</strong>.  
+      It provides automated responses based on common student concerns.  
+      It is <strong>not a substitute</strong> for real counseling and needs further testing.  
+      If you feel overwhelmed, please reach out to a trusted adult or professional.  
+    </p>
+    <button class="button" onclick="navigateTo('chatbot')">I Understand</button>
+    <button class="button" onclick="navigateTo('home')">Cancel</button>
+  </div>
+
+  <!-- Chatbot -->
+  <div id="chatbot" class="container hidden">
+    <h2>MindMap Chatbot (Prototype)</h2>
+    <p>Select a question below to see supportive advice:</p>
+    <h3>📘 School Concerns</h3>
+    <div id="school-questions"></div>
+    <h3>🏠 Home/Personal Concerns</h3>
+    <div id="home-questions"></div>
+    <h3>💬 Response</h3>
+    <div id="chat-response" class="response-box">Click a question above to see a response.</div>
+    <button class="button" onclick="navigateTo('home')">Back to Home</button>
+  </div>
+
+<script>
+  function navigateTo(pageId) {
+    document.querySelectorAll('.container').forEach(page => page.classList.add('hidden'));
+    document.getElementById(pageId).classList.remove('hidden');
+  }
+
+  function submitQuiz() {
+    const answers = Array.from(document.querySelectorAll('#quizForm input:checked')).map(el => parseInt(el.value));
+    const totalScore = answers.reduce((total, score) => total + score, 0);
+    const evaluationResult = getEvaluationResult(totalScore);
+    displayEvaluationResult(evaluationResult, totalScore);
+  }
+
+  function getEvaluationResult(score) {
+    if (score <= 20) {
+      return { message: 'You are feeling emotionally well.', suggestion: 'Maintain mindfulness and gratitude.' };
+    } else if (score <= 30) {
+      return { message: 'You may be experiencing some symptoms of mental health issues.', suggestion: 'Talk to a counselor, set simple goals, and take small steps.' };
+    } else {
+      return { message: 'You may be facing significant concerns. Please seek professional help immediately.', suggestion: 'Talking to a counselor or trusted adult is important. You are not alone.' };
+    }
+  }
+
+  function displayEvaluationResult(result, score) {
+    document.getElementById('scoreResult').textContent = `Your Score: ${score}`;
+    document.getElementById('encouragingMessage').innerHTML = `${result.message}<br><br>Suggestions: ${result.suggestion}`;
+    navigateTo('evaluationPage');
+  }
+
+  // Chatbot Responses
+  const responses = {
+    "I’m stressed about exams.": "It's normal to feel stressed. Break study sessions into smaller parts and take breaks.",
+    "I can’t focus on my studies.": "Remove distractions and try short study bursts (25 minutes).",
+    "I feel nervous during recitations.": "Take deep breaths. Mistakes are part of learning.",
+    "I’m afraid of failing my grades.": "Failure doesn’t define you. Focus on progress.",
+    "I have trouble managing my time.": "Start with small tasks and build from there.",
+    "I feel left out by my classmates.": "Try connecting with one person who shares your interests.",
+    "I get anxious about group projects.": "Set small goals with your group and communicate.",
+    "I don’t understand my lessons.": "Don’t hesitate to ask for help. Re-explain in your own words.",
+    "I feel pressured by my teachers.": "Teachers want you to grow, but remember you’re human.",
+    "I’m worried about graduating.": "The future is uncertain. Focus on what you can control.",
+    "My parents expect too much from me.": "Your worth isn’t only in achievements. Communicate how you feel.",
+    "I argue with my family a lot.": "Pause when emotions run high. Calm talks work better.",
+    "I feel lonely at home.": "Try reaching out to friends or doing activities you enjoy.",
+    "My family doesn’t understand me.": "Writing feelings down may help express them better.",
+    "I’m worried about money problems.": "Focus on what you can control and seek guidance from adults.",
+    "I don’t have anyone to talk to.": "Help lines and school counselors are there to listen.",
+    "I feel unmotivated.": "Start with very small steps. Small wins boost motivation.",
+    "I’m sad most of the time.": "Share it with someone you trust—you don’t have to hold it in.",
+    "I don’t know what to do with my future.": "Explore interests slowly. No one has it all figured out.",
+    "I feel like giving up.": "You matter. Please reach out immediately to someone you trust."
+  };
+
+  const schoolQuestions = [
+    "I’m stressed about exams.", "I can’t focus on my studies.", "I feel nervous during recitations.",
+    "I’m afraid of failing my grades.", "I have trouble managing my time.", "I feel left out by my classmates.",
+    "I get anxious about group projects.", "I don’t understand my lessons.", "I feel pressured by my teachers.",
+    "I’m worried about graduating."
+  ];
+
+  const homeQuestions = [
+    "My parents expect too much from me.", "I argue with my family a lot.", "I feel lonely at home.",
+    "My family doesn’t understand me.", "I’m worried about money problems.", "I don’t have anyone to talk to.",
+    "I feel unmotivated.", "I’m sad most of the time.", "I don’t know what to do with my future.", "I feel like giving up."
+  ];
+
+  function renderQuestions() {
+    const schoolDiv = document.getElementById('school-questions');
+    const homeDiv = document.getElementById('home-questions');
+    schoolQuestions.forEach(q => {
+      const btn = document.createElement('button');
+      btn.className = 'button';
+      btn.textContent = q;
+      btn.onclick = () => showResponse(q);
+      schoolDiv.appendChild(btn);
+    });
+    homeQuestions.forEach(q => {
+      const btn = document.createElement('button');
+      btn.className = 'button';
+      btn.textContent = q;
+      btn.onclick = () => showResponse(q);
+      homeDiv.appendChild(btn);
+    });
+  }
+
+  function showResponse(question) {
+    document.getElementById('chat-response').textContent = responses[question] || "Sorry, I don’t understand.";
+  }
+
+  renderQuestions();
+</script>
+</body>
+</html>
